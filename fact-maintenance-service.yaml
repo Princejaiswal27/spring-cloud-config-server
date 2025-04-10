@@ -1,0 +1,16 @@
+server:
+  port: 9005
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: fact
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+    validateOnMigrate: false
+    schemas: fact
+    table: fact_flyway_schema_history
