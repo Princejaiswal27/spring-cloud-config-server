@@ -25,3 +25,51 @@ spring:
       hibernate:
         default_schema: fact
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  cloud:
+    gateway:
+      routes:
+        - id: party-service
+          uri: lb://party-service
+          predicates:
+            - Path=/api/party-service/**
+          filters:
+            - RewritePath=/api/party-service/(?<segment>.*), /${segment}
+            - TokenRelay=
+        - id: property-management-service
+          uri: lb://property-management-service
+          predicates:
+            - Path=/api/property-management-service/**
+          filters:
+            - RewritePath=/api/property-management-service/(?<segment>.*), /${segment}
+            - TokenRelay=
+        - id: maintenance-request-service
+          uri: lb://maintenance-request-service
+          predicates:
+            - Path=/api/maintenance-request-service/**
+          filters:
+            - RewritePath=/api/maintenance-request-service/(?<segment>.*), /${segment}
+            - TokenRelay=
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/payment-service/**
+          filters:
+            - RewritePath=/api/payment-service/(?<segment>.*), /${segment}
+            - TokenRelay=
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/realms/scalean-technologies/protocol/openid-connect/certs
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/scalean-technologies
+        registration:
+          gateway:
+            provider: keycloak
+            client-id: spring-with-test-scope
+            client-secret: IWLSnakHG8aNTWNaWuSj0a11UY4lzxd9
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://localhost:9001/login/oauth2/code/{registrationId}"
+            scope: openid
