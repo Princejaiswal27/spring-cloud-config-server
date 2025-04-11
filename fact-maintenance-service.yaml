@@ -1,16 +1,26 @@
 server:
   port: 9005
-
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        default_schema: fact
+  application:
+    name: fact-maintenance-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+  datasource:
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
   flyway:
     enabled: true
     baselineOnMigrate: true
     validateOnMigrate: false
     schemas: fact
     table: fact_flyway_schema_history
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+    properties:
+      hibernate:
+        default_schema: fact
+        dialect: org.hibernate.dialect.PostgreSQLDialect
