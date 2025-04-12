@@ -8,7 +8,7 @@ eureka:
     ip-address: localhost
 spring:
   datasource:
-    password: postgres
+    password: postgresSS
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
   flyway:
