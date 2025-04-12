@@ -1,6 +1,9 @@
 server:
   port: 9001
-cloud:
+spring:
+  application:
+    name: gateway
+  cloud:
     gateway:
       routes:
         - id: party-service
