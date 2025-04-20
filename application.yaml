@@ -25,3 +25,8 @@ spring:
       hibernate:
         default_schema: fact
         dialect: org.hibernate.dialect.PostgreSQLDialect
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
