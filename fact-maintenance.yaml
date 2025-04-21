@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: fact-maintenance
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 my:
   custom:
     value: Hello World!!..
