@@ -5,4 +5,4 @@ spring:
     name: fact-maintenance
 my:
   custom:
-    value: Hello World!!
+    value: Hello World!!..
